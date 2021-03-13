@@ -1,0 +1,1 @@
+Design a library which models a platform with a landing zone. System shall provide a function which, given a position, returns if the position asked is placed in the landing zone and free/clashed. When a position is reserved, the surroundings positions (+1 -1) can not be reserved.
