@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace ToDoManager.Entities
 {
@@ -21,6 +22,7 @@ namespace ToDoManager.Entities
         /// <summary>
         /// Id (Read only property)
         /// </summary>
+        [JsonPropertyName("Id")]
         public int Id
         {
             get
@@ -32,16 +34,23 @@ namespace ToDoManager.Entities
 
                 return _id;
             }
+            set 
+            {
+                _id = value;
+            }
         }
 
         /// <summary>
         /// Name
         /// </summary>
+        /// 
+        [JsonPropertyName("Name")]
         public string Name { get; set; }
 
         /// <summary>
         /// Description
         /// </summary>
+        [JsonPropertyName("Description")]
         public string Description { get; set; }
 
         /// <summary>

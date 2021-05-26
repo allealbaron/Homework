@@ -206,13 +206,11 @@ namespace TestToDoAPI
         /// </summary>
         public void TestUpdateNotExistingToDo()
         {
-            int id = 1000;
-
-            OkObjectResult items = (OkObjectResult)controller.Get(id);
+            int id = 0;
 
             ToDo c = new() { Name = "Pepe", Description = "Pepe" };
 
-            ActionResult ar = controller.UpdateToDo(0, c);
+            ActionResult ar = controller.UpdateToDo(id, c);
 
             Assert.IsInstanceOf<BadRequestObjectResult>(ar);
 
@@ -225,7 +223,7 @@ namespace TestToDoAPI
         public void TestAssignCategory()
         {
             int id = 1;
-            int idCategory = 3;
+            int idCategory = 1;
 
             ActionResult ar = controller.UpdateToDoCategory(id, idCategory);
 

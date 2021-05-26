@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using ToDoManager.Entities;
+using System.IO;
+using System.Text.Json;
 
 namespace ToDoManager.Services
 {
@@ -23,10 +25,12 @@ namespace ToDoManager.Services
         {
             if (Items.Count == 0)
             {
-                Items.Add(new Category() { Name = "Urgent", Description = "Do it ASAP" });
-                Items.Add(new Category() { Name = "High", Description = "Do it in the next two days" });
-                Items.Add(new Category() { Name = "Medium", Description = "Do it during this week" });
-                Items.Add(new Category() { Name = "Low", Description = "Do it this month" });
+
+                items.AddRange(
+                        JsonSerializer.Deserialize<List<Category>>(
+                            File.ReadAllText(Path.Combine(ResourcesPath, "InitialCategories.json"))
+                            )
+                        );                
             }
         }
 
@@ -34,6 +38,11 @@ namespace ToDoManager.Services
         /// Items (Read only property)
         /// </summary>
         protected override List<BaseItem> Items => items;
+
+        /// <summary>
+        /// File Storage (Read only property)
+        /// </summary>
+        protected override string FileStorage => "FinalCategories.json";
 
         /// <summary>
         /// Updates Category
@@ -49,6 +58,7 @@ namespace ToDoManager.Services
             {
                 itemToUpdate.Name = item.Name;
                 itemToUpdate.Description = item.Description;
+                SaveItems();
                 return itemToUpdate;
             }
             else

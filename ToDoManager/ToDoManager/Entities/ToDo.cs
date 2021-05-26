@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 
 namespace ToDoManager.Entities
 {
@@ -16,12 +17,15 @@ namespace ToDoManager.Entities
         /// <summary>
         /// Creation time
         /// </summary>
+        [JsonPropertyName("DateTime")]
         public DateTime DateTime;
 
         /// <summary>
         /// Category
         /// </summary>
+        [JsonPropertyName("Category")]
         public Category Category { get; set; }
+
         protected override int Counter { 
             get 
             {

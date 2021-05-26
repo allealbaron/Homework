@@ -1,0 +1,42 @@
+[
+  {
+    "Id": 1,
+    "Name": "Task 1",
+    "Description": "Clean your room",
+    "Category": {
+      "Id": 1,
+      "Name": null,
+      "Description": null
+    }
+  },
+  {
+    "Id": 2,
+    "Name": "Task 2",
+    "Description": "Go to the dentist",
+    "Category": {
+      "Id": 1,
+      "Name": null,
+      "Description": null
+    }
+  },
+  {
+    "Id": 3,
+    "Name": "Task 3",
+    "Description": "Meet John",
+    "Category": {
+      "Id": 1,
+      "Name": null,
+      "Description": null
+    }
+  },
+  {
+    "Id": 4,
+    "Name": "Task 4",
+    "Description": "Read a book",
+    "Category": {
+      "Id": 1,
+      "Name": null,
+      "Description": null
+    }
+  }
+]

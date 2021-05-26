@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using ToDoManager.Entities;
+using System.IO;
+using System.Text.Json;
 
 namespace ToDoManager.Services
 {
@@ -10,10 +12,21 @@ namespace ToDoManager.Services
     /// </summary>
     abstract public class BaseService
     {
+
+        /// <summary>
+        /// Resources path
+        /// </summary>
+        protected string ResourcesPath = Path.Combine(Directory.GetCurrentDirectory(), "Resources");
+
         /// <summary>
         /// List of items (abstract property)
         /// </summary>
         protected abstract List<BaseItem> Items { get; }
+
+        /// <summary>
+        /// File Storage
+        /// </summary>
+        protected abstract string FileStorage { get; }
 
         /// <summary>
         /// Adds an item
@@ -25,14 +38,34 @@ namespace ToDoManager.Services
 
             if (item.IsValid())
             {
+                item.Id = Items.Count + 1;
                 Items.Add(item);
                 _ = item.Id;
+
+                SaveItems();
+
                 return (BaseItem)item.Clone();
             }
             else
             {
                 throw new Exception("Not valid Item");
             }
+
+        }
+
+        /// <summary>
+        /// Serialize the items as a JSON File
+        /// </summary>
+        protected void SaveItems()
+        {
+            string filePath = Path.Combine(ResourcesPath, FileStorage);
+            
+            if (File.Exists(filePath))
+            {
+                File.Delete(filePath);
+            }
+
+            File.WriteAllText(filePath, JsonSerializer.Serialize(Items));
 
         }
 
@@ -54,6 +87,7 @@ namespace ToDoManager.Services
             if (Items.Where(t => t.Id == id).Any())
             {
                 _ = Items.RemoveAll(t => t.Id == id);
+                SaveItems();
                 return id;
             }
             else

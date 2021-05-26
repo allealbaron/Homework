@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using ToDoManager.Entities;
+using System.IO;
+using System.Text.Json;
 
 namespace ToDoManager.Services
 {
@@ -29,42 +31,25 @@ namespace ToDoManager.Services
             if (Items.Count == 0)
             {
 
-                Items.Add(new ToDo()
-                {
-                    Name = "Task 1",
-                    Description = "Clean your room",
-                    DateTime = DateTime.Now,
-                    Category = (Category)categoryService.GetItem(1)
-                });
-                Items.Add(new ToDo()
-                {
-                    Name = "Task 2",
-                    Description = "Go to the dentist",
-                    DateTime = DateTime.Now,
-                    Category = (Category)categoryService.GetItem(1)
-                });
-                Items.Add(new ToDo()
-                {
-                    Name = "Task 3",
-                    Description = "Meet John",
-                    DateTime = DateTime.Now,
-                    Category = (Category)categoryService.GetItem(1)
-                });
-                Items.Add(new ToDo()
-                {
-                    Name = "Task 4",
-                    Description = "Read a book",
-                    DateTime = DateTime.Now,
-                    Category = (Category)categoryService.GetItem(1)
-                });
-            }
+                items.AddRange(
+                        JsonSerializer.Deserialize<List<ToDo>>(
+                            File.ReadAllText(Path.Combine(ResourcesPath, "InitialToDos.json"))
+                            )
+                        );
 
+            }
         }
 
         /// <summary>
         /// Items (Read only property)
         /// </summary>
         protected override List<BaseItem> Items => items;
+
+        /// <summary>
+        /// File Storage (Read only property)
+        /// </summary>
+        protected override string FileStorage => "FinalToDos.json";
+
 
         /// <summary>
         /// Updates ToDo
@@ -82,6 +67,7 @@ namespace ToDoManager.Services
                 itemToUpdate.Name = item.Name;
                 itemToUpdate.Description = item.Description;
                 itemToUpdate.Category = ((ToDo)item).Category;
+                SaveItems();
                 return itemToUpdate;
             }
             else
