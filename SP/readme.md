@@ -10,18 +10,23 @@ Solution: {1,2,3,4,5,6} -> 2 movements (3+1 = 4, 6-1 = 5)
 <h1>Task 3</h1>
 Given two arrays A and B, return the number of different times there is an index that, splitting those arrays by the same index, the sum of the items contained in each subarray is the same.
 
-Example: 
+<h2>Example: </h2>
 A { 0, 4, -1, 0, 3 };
 B { 0, -2, 5, 0, 3 };
 
-There are two solutions:
-Index = 2
-    A1 = 0 + 4 + -1 = 3 
-    A2 = 0 + 3 = 3
-    B1 = 0 + -2 + 5 = 3
-    B2 = 0 + 3 = 3
-Index = 5
-    A1 = 0 + 4 + -1 + 0 = 3
-    A2 = 3
-    B1 = 0 + -2 + 5 + 0 = 3
-    B2 = 3
+<p>There are two solutions:</p>
+
+<p>Index = 2</p>
+<ul>
+    <li>A1 = 0 + 4 + -1 = 3</li> 
+    <li>A2 = 0 + 3 = 3</li>
+    <li>B1 = 0 + -2 + 5 = 3</li>
+    <li>B2 = 0 + 3 = 3</li>
+</ul>
+<p>Index = 5</p>
+<ul>
+    <li>A1 = 0 + 4 + -1 + 0 = 3</li>
+    <li>A2 = 3</li>
+    <li>B1 = 0 + -2 + 5 + 0 = 3</li>
+    <li>B2 = 3</li>
+</ul>
