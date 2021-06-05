@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RY": {
+      "commandName": "Project",
+      "commandLineArgs": "DE 1000 40"
+    }
+  }
+}
